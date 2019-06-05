@@ -5,7 +5,6 @@ import * as serviceWorker from "./serviceWorker";
 import Routes from "./Routes";
 
 import GitGhostApp from "./GitGhostApp";
-import "./GitGhost.scss";
 
 ReactDOM.render(<Routes />, document.getElementById("root"));
 

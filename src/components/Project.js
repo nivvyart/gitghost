@@ -1,14 +1,13 @@
 import React, { Component } from "react";
-import "../style/main.css";
 
-class Home extends Component {
+class Project extends Component {
   render() {
     return (
       <div className="container">
-        <h1>This is the Home screen</h1>
+        <h1>This will be the project screen</h1>
       </div>
     );
   }
 }
 
-export default Home;
+export default Project;

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Home from "./components/Home";
 import Index from "./components/Index";
+import Project from "./components/Project";
 
 import {
   HashRouter as Router,
@@ -20,6 +21,7 @@ class Routes extends Component {
       <Router>
         <Route exact path="/" component={Home} />
         <Route path="/index" component={Index} />
+        <Route path="/project" component={Project} />
       </Router>
     );
   }
