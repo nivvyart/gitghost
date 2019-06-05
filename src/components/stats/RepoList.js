@@ -8,11 +8,12 @@ client
   .query({
     query: gql`
       {
-        viewer {
-          name
-          repositories(last: 5) {
-            nodes {
-              name
+        user(login: "jamesla") {
+          repositories(last: 10) {
+            edges {
+              node {
+                name
+              }
             }
           }
         }

@@ -6,9 +6,16 @@ class Index extends Component {
 
     this.state = {
       username: "",
+      repository: "",
       repos: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     };
+    this.handleChange = this.handleChange.bind(this);
   }
+
+  handleChange(e) {
+    this.setState({ username: e.target.value });
+  }
+
   render() {
     return (
       <div className="container">
@@ -20,10 +27,12 @@ class Index extends Component {
             </label>
             <div class="input-group mb-2 mr-sm-2">
               <div class="input-group-prepend">
-                <div class="input-group-text">@</div>
+                <div class="input-group-text">👻</div>
               </div>
               <input
                 type="text"
+                value={this.state.username}
+                onChange={this.handleChange}
                 class="form-control"
                 id="inlineFormInputGroupUsername2"
                 placeholder="GitHub Username"
