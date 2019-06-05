@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./GitGhost.scss";
-import GitGhostApp from "./GitGhostApp";
 import * as serviceWorker from "./serviceWorker";
+
+import GitGhostApp from "./GitGhostApp";
+import "./GitGhost.scss";
 
 ReactDOM.render(<GitGhostApp />, document.getElementById("root"));
 
