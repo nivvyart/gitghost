@@ -14,10 +14,10 @@ client
   })
   .then(result => console.log(result));
 
-class TeamFeatures extends Component {
+class SoloRefactor extends Component {
   render() {
-    return <h1> TeamFeatures</h1>;
+    return <h1> SoloRefactor</h1>;
   }
 }
 
-export default TeamFeatures;
+export default SoloRefactor;

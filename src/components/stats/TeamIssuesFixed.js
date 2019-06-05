@@ -14,10 +14,10 @@ client
   })
   .then(result => console.log(result));
 
-class TeamFeatures extends Component {
+class TeamIssuesFixed extends Component {
   render() {
-    return <h1> TeamFeatures</h1>;
+    return <h1> TeamIssuesFixed</h1>;
   }
 }
 
-export default TeamFeatures;
+export default TeamIssuesFixed;
