@@ -2,12 +2,19 @@ import React, { Component } from "react";
 import client from "../../utils/GitHubGQL";
 import { gql } from "apollo-boost";
 
+//repoList, needs to be 5-8? By default.
+
 client
   .query({
     query: gql`
       {
         viewer {
-          login
+          name
+          repositories(last: 5) {
+            nodes {
+              name
+            }
+          }
         }
       }
     `
@@ -16,7 +23,7 @@ client
 
 class RepoList extends Component {
   render() {
-    return <h1> Repolist comming soon</h1>;
+    return <h1>RepoList - Console.log(5)</h1>;
   }
 }
 

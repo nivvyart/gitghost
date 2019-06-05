@@ -6,8 +6,22 @@ client
   .query({
     query: gql`
       {
-        viewer {
-          login
+        repository(owner: "octocat", name: "Hello-World") {
+          issues(last: 20, states: CLOSED) {
+            edges {
+              node {
+                title
+                url
+                labels(first: 5) {
+                  edges {
+                    node {
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     `
@@ -16,7 +30,7 @@ client
 
 class TeamIssuesFixed extends Component {
   render() {
-    return <h1> TeamIssuesFixed</h1>;
+    return <h1>TeamIssuesFixed console.log(20) - Octocat "Hello-World"</h1>;
   }
 }
 

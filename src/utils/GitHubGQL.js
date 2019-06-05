@@ -1,5 +1,5 @@
 import ApolloClient from "apollo-boost";
-import { gql } from "apollo-boost";
+// import { gql } from "apollo-boost";
 
 const { token } = require("./secrets.json");
 
