@@ -23,8 +23,8 @@ class Routes extends Component {
       <ApolloProvider client={client}>
         <Router>
           <Route exact path="/" component={Home} />
-          <Route path="/Search" component={Search} />
-          <Route path="/project" component={Project} />
+          <Route path="/search" component={Search} />
+          <Route path="/project/:username/:repository" component={Project} />
         </Router>
       </ApolloProvider>
     );

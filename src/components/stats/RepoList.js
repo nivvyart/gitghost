@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import client from "../../utils/GitHubGQL";
-
 import { Query } from "react-apollo";
 import { gql } from "apollo-boost";
 

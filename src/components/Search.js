@@ -3,7 +3,7 @@ import ApolloProvider from "react-apollo";
 import { Query } from "react-apollo";
 import { gql } from "apollo-boost";
 import RepoList from "./stats/RepoList";
-import { Redirect } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 
 class Search extends Component {
   constructor() {
@@ -26,10 +26,13 @@ class Search extends Component {
     this.setState({ repository: e.target.value });
   }
 
-  _selectRepo(e) {
-    const link =
-      "/Project/" + this.state.username + "/" + this.state.repository;
-    return <Redirect to={link} />;
+  _selectRepo() {
+    console.log(this.state.username, this.state.repository);
+    this.props.history.push(
+      `/project/${this.state.username}/${this.state.repository}/`
+
+      //this.props.match.params.usernmae/repo
+    );
   }
 
   render() {
