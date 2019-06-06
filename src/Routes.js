@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import Home from "./components/Home";
-import Index from "./components/Index";
+import Search from "./components/Search";
 import Project from "./components/Project";
+import { ApolloProvider } from "react-apollo";
+import client from "./utils/GitHubGQL";
 
 import {
   HashRouter as Router,
@@ -18,11 +20,13 @@ class Routes extends Component {
 
   render() {
     return (
-      <Router>
-        <Route exact path="/" component={Home} />
-        <Route path="/index" component={Index} />
-        <Route path="/project" component={Project} />
-      </Router>
+      <ApolloProvider client={client}>
+        <Router>
+          <Route exact path="/" component={Home} />
+          <Route path="/Search" component={Search} />
+          <Route path="/project" component={Project} />
+        </Router>
+      </ApolloProvider>
     );
   }
 }

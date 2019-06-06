@@ -1,10 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "@patternfly/react-core/dist/styles/base.css";
+
 import * as serviceWorker from "./serviceWorker";
 
 import Routes from "./Routes";
 
-import GitGhostApp from "./GitGhostApp";
+// import GitGhostApp from "./GitGhostApp";
 
 ReactDOM.render(<Routes />, document.getElementById("root"));
 
