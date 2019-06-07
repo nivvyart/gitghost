@@ -9,7 +9,7 @@ const OpenPullRequests = props => (
         user(login: "${props.username}") {
           repository(name: "${props.repository}") {
             url
-            pullRequests(last: 30, states: OPEN) {
+            pullRequests(last: 30) {
               edges {
                 node {
                   id
@@ -38,17 +38,17 @@ const OpenPullRequests = props => (
       console.log(startDate);
       console.log(endDate);
 
-      //data.user.repository.pullRequest.edges.filter( (pr) => pr.closed === flase )
-      //data.user.repository.pullRequest.edges.filter( (pr) => pr.closed === flase ).map etc etc
-      return data.user.repository.pullRequests.edges.map(({ node }, index) => (
-        <div>
-          <tr key={index}>
-            <td>{node.title}</td>
-            <td>{node.url}</td>
-            <td>{node.createdAt}</td>
-          </tr>
-        </div>
-      ));
+      return data.user.repository.pullRequests.edges
+        .filter(({ node }) => node.createdAt > startDate)
+        .map(({ node }, index) => (
+          <div>
+            <tr key={index}>
+              <td>{node.title}</td>
+              <td>{node.url}</td>
+              <td>{node.createdAt}</td>
+            </tr>
+          </div>
+        ));
     }}
   </Query>
 );
