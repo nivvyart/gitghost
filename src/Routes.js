@@ -24,7 +24,10 @@ class Routes extends Component {
         <Router>
           <Route exact path="/" component={Home} />
           <Route path="/search" component={Search} />
-          <Route path="/project/:username/:repository" component={Project} />
+          <Route
+            path="/project/:username/:repository/:startDate/:endDate"
+            component={Project}
+          />
         </Router>
       </ApolloProvider>
     );

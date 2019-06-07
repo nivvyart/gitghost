@@ -7,7 +7,7 @@ const RepoList = props => (
     query={gql`
       {
         user(login: "${props.username}") {
-          repositories(last: 5) {
+          repositories(last: 8) {
             edges {
               node {
                 name

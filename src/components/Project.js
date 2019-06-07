@@ -12,6 +12,8 @@ class Project extends Component {
         <OpenPullRequests
           username={this.props.match.params.username}
           repository={this.props.match.params.repository}
+          startDate={this.props.match.params.startDate}
+          endDate={this.props.match.params.endDate}
         />
       </div>
     );
