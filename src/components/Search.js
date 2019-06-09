@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import ApolloProvider from "react-apollo";
 import { Query } from "react-apollo";
 import { gql } from "apollo-boost";
-import RepoList from "./stats/RepoList";
 import { Route, Redirect } from "react-router-dom";
+import moment from "moment";
+
+import RepoList from "./stats/RepoList";
 
 class Search extends Component {
   constructor() {
@@ -12,8 +14,10 @@ class Search extends Component {
     this.state = {
       username: "",
       repository: "",
-      startDate: new Date(),
-      endDate: ""
+      startDate: moment().format("YYYY-MM-DD"),
+      endDate: moment()
+        .add(5, "d")
+        .format("YYYY-MM-DD")
     };
     this._handleUserChange = this._handleUserChange.bind(this);
     this._handleRepoChange = this._handleRepoChange.bind(this);
@@ -38,6 +42,7 @@ class Search extends Component {
     this.setState({ endDate: e.target.value });
   }
 
+  //need to add a default search value here if those fields are not added.
   _selectRepo() {
     console.log(this.state.username, this.state.repository);
     this.props.history.push(
@@ -86,6 +91,7 @@ class Search extends Component {
           <input
             className="form-control mb-2 mr-sm-2"
             type="date"
+            min="2016-01-01"
             value={this.state.startDate}
             onChange={this._handleStartDateChange}
           />

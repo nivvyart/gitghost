@@ -32,6 +32,8 @@ const OpenPullRequests = props => (
       if (loading) return <p>Loading...</p>;
       if (error) return <p>Error :(</p>;
 
+      // found a bug here, need to filter by start date and end date
+
       let startDate = new Date(props.startDate).toISOString();
       let endDate = props.endDate + "T23:59:59.999Z";
 
@@ -39,13 +41,16 @@ const OpenPullRequests = props => (
       console.log(endDate);
 
       return data.user.repository.pullRequests.edges
-        .filter(({ node }) => node.createdAt > startDate)
+        .filter(
+          ({ node }) => node.createdAt > startDate && node.createdAt < endDate
+        )
         .map(({ node }, index) => (
           <div>
             <tr key={index}>
               <td>{node.title}</td>
               <td>{node.url}</td>
               <td>{node.createdAt}</td>
+              <td>{index + 1}</td>
             </tr>
           </div>
         ));

@@ -4,6 +4,7 @@ import { gql } from "apollo-boost";
 
 const RepoList = props => (
   <Query
+    pollInterval={1000}
     query={gql`
       {
         user(login: "${props.username}") {
