@@ -27,10 +27,10 @@ client.query({
 });
 //.then(result => console.log(result));
 
-class TeamIssuesFixed extends Component {
+class TeamIssuesClosed extends Component {
   render() {
     return <h1>TeamIssuesFixed console.log(20) - Octocat "Hello-World"</h1>;
   }
 }
 
-export default TeamIssuesFixed;
+export default TeamIssuesClosed;

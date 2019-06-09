@@ -11,7 +11,7 @@ import SoloCommitStats from "./stats/SoloCommitStats";
 class Project extends Component {
   render() {
     return (
-      <div className="container">
+      <div className="project-container">
         <h1>This will be the project screen</h1>
         <OpenPullRequests
           username={this.props.match.params.username}
@@ -19,25 +19,25 @@ class Project extends Component {
           startDate={this.props.match.params.startDate}
           endDate={this.props.match.params.endDate}
         />
-        <PullAddition
-          username={this.props.match.params.username}
-          repository={this.props.match.params.repository}
-          startDate={this.props.match.params.startDate}
-          endDate={this.props.match.params.endDate}
-        />
-        <PullRefactor
-          username={this.props.match.params.username}
-          repository={this.props.match.params.repository}
-          startDate={this.props.match.params.startDate}
-          endDate={this.props.match.params.endDate}
-        />
-        <SoloCommitStats
-          username={this.props.match.params.username}
-          repository={this.props.match.params.repository}
-          startDate={this.props.match.params.startDate}
-          endDate={this.props.match.params.endDate}
-        />
       </div>
+      // <PullAddition
+      //   username={this.props.match.params.username}
+      //   repository={this.props.match.params.repository}
+      //   startDate={this.props.match.params.startDate}
+      //   endDate={this.props.match.params.endDate}
+      // />
+      // <PullRefactor
+      //   username={this.props.match.params.username}
+      //   repository={this.props.match.params.repository}
+      //   startDate={this.props.match.params.startDate}
+      //   endDate={this.props.match.params.endDate}
+      // />
+      // <SoloCommitStats
+      //   username={this.props.match.params.username}
+      //   repository={this.props.match.params.repository}
+      //   startDate={this.props.match.params.startDate}
+      //   endDate={this.props.match.params.endDate}
+      // />
     );
   }
 }

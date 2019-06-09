@@ -6,28 +6,32 @@ class SoloCommitStats extends Component {
   constructor(props) {
     super();
     this.state = {
-      data: null
+      data: null,
+      username: props.username,
+      repository: props.repository
     };
   }
 
   componentDidMount() {
-    const username = "nivvyart";
-    const repo = "gitghost";
+    const username = this.state.username;
+    const repository = this.state.repository;
 
-    // Github.getUserRepo(username, repo).then(({ data }) => {
-    //   this.setState({ user: data });
-    //   console.log(data);
-    // });
-    Github.getUserRepo(username, repo).then(result => {
+    Github.getUserRepo(username, repository).then(result => {
       result.data.forEach(commit => {
         axios
           .get(
-            `https://api.github.com/repos/${username}/${repo}/commits/${
+            `https://api.github.com/repos/${username}/${repository}/commits/${
               commit.sha
             }`
           )
           .then(result => {
-            console.log(result.data);
+            console.log(
+              result.data.commit.author.date,
+              result.data.author.login,
+              result.data.stats.total,
+              result.data.stats.additions,
+              result.data.stats.deletions
+            );
           });
       });
     });

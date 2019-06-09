@@ -16,10 +16,10 @@ const OpenPullRequests = props => (
                   author {
                     login
                   }
-                  title
+
                   createdAt
                   closed
-                  url
+
                 }
               }
             }
@@ -37,9 +37,6 @@ const OpenPullRequests = props => (
       let startDate = new Date(props.startDate).toISOString();
       let endDate = props.endDate + "T23:59:59.999Z";
 
-      console.log(startDate);
-      console.log(endDate);
-
       return data.user.repository.pullRequests.edges
         .filter(
           ({ node }) => node.createdAt > startDate && node.createdAt < endDate
@@ -47,9 +44,8 @@ const OpenPullRequests = props => (
         .map(({ node }, index) => (
           <div>
             <tr key={index}>
-              <td>{node.title}</td>
-              <td>{node.url}</td>
               <td>{node.createdAt}</td>
+              <td>{node.closed}</td>
               <td>{index + 1}</td>
             </tr>
           </div>

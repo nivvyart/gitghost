@@ -5,3 +5,12 @@
   background-color: khaki;
   min-height: 400px;
 }
+
+.project-container {
+  margin: 0 auto;
+  max-width: 95vw;
+  max-height: 95vw;
+  margin: 40px;
+  background-color: khaki;
+  min-height: 400px;
+}
