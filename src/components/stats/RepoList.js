@@ -23,7 +23,7 @@ const RepoList = props => (
   >
     {({ loading, error, data }) => {
       if (loading) return <p>Loading...</p>;
-      if (error) return <p>Error :(</p>;
+      if (error) return <p>Please use the search function above</p>;
 
       return data.user.repositories.edges.map(({ node }, index) => (
         <tr key={index}>

@@ -6,7 +6,9 @@ class SoloRefactor extends Component {
   constructor(props) {
     super();
     this.state = {
-      data: null,
+      results: [],
+      startDate: new Date(props.startDate).toISOString(),
+      endDate: props.endDate + "T23:59:59.999Z",
       username: props.username,
       repository: props.repository
     };
@@ -25,17 +27,24 @@ class SoloRefactor extends Component {
             }`
           )
           .then(result => {
-            console.log(
-              result.data.commit.author.date,
-              result.data.author.login,
-              result.data.stats.deletions
-            );
+            let data;
+            if (
+              result.data.commit.author.date > this.state.startDate &&
+              result.data.commit.author.date < this.state.endDate
+            ) {
+              data = {
+                author: result.data.author.login,
+                deletions: result.data.stats.deletions
+              };
+              this.setState({ results: [...this.state.results, data] });
+            }
           });
       });
     });
   }
 
   render() {
+    if (!this.state.results) return <p>loading...</p>;
     return (
       <div>
         <h1>Refactor King</h1>
@@ -46,11 +55,3 @@ class SoloRefactor extends Component {
 }
 
 export default SoloRefactor;
-
-// axios.get(`https://api.github.com/repos/${username}/${repo}/commits`).then(result => {
-//   result.data.forEach(commit => {
-//     axios.get(`/repos/${username}/${repo}/commits/${commit.sha_or_whatever}`).then(result => {
-//       console.log(result.data); // Here you should have the info for each commit
-//     })
-//   })
-// });

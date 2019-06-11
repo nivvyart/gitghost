@@ -7,16 +7,10 @@
 } */
 
 .project-container {
-  position: absolute;
   top: 0;
   left: 0;
   max-width: 100vw;
   max-height: 100vh;
   background-color: khaki;
   padding: 2em;
-}
-
-.smallPlease {
-  max-width: 400px;
-  max-height: 400px;
 }

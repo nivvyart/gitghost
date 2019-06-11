@@ -2,11 +2,22 @@ import React, { Component } from "react";
 import axios from "axios";
 import Github from "../../utils/GitHubAxios";
 
+import {
+  Chart,
+  ChartAxis,
+  ChartGroup,
+  ChartLegend,
+  ChartLine,
+  ChartThemeColor
+} from "@patternfly/react-charts";
+
 class TotalCommitStats extends Component {
   constructor(props) {
     super();
     this.state = {
-      data: null,
+      results: [],
+      startDate: new Date(props.startDate).toISOString(),
+      endDate: props.endDate + "T23:59:59.999Z",
       username: props.username,
       repository: props.repository
     };
@@ -25,34 +36,47 @@ class TotalCommitStats extends Component {
             }`
           )
           .then(result => {
-            console.log(
-              result.data.commit.author.date,
-              result.data.author.login,
-              result.data.stats.total,
-              result.data.stats.additions,
-              result.data.stats.deletions
-            );
+            let data;
+            if (
+              result.data.commit.author.date > this.state.startDate &&
+              result.data.commit.author.date < this.state.endDate
+            ) {
+              data = {
+                author: result.data.commit.author.login,
+                stats: result.data.stats.total
+              };
+              this.setState({ results: [...this.state.results, data] });
+            }
           });
       });
     });
   }
 
   render() {
+    if (!this.state.results) return <p>loading...</p>;
+    let total = 0;
+    const points = this.state.results.map((data, index) => {
+      return {
+        name: "commits",
+        x: index,
+        y: (total += data.stats)
+      };
+    });
+
     return (
       <div>
-        <h1>solocommits</h1>
-        <p> check the json log</p>
+        <div className="line-chart-inline">
+          <div className="line-chart-container">
+            <Chart themeColor={ChartThemeColor.blue}>
+              <ChartGroup>
+                <ChartLine data={points} />
+              </ChartGroup>
+            </Chart>
+          </div>
+        </div>
       </div>
     );
   }
 }
 
 export default TotalCommitStats;
-
-// axios.get(`https://api.github.com/repos/${username}/${repo}/commits`).then(result => {
-//   result.data.forEach(commit => {
-//     axios.get(`/repos/${username}/${repo}/commits/${commit.sha_or_whatever}`).then(result => {
-//       console.log(result.data); // Here you should have the info for each commit
-//     })
-//   })
-// });

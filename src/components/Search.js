@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import moment from "moment";
 
 import RepoList from "./stats/RepoList";
+import Navigation from "./Navigation";
 
 class Search extends Component {
   constructor() {
@@ -52,65 +53,69 @@ class Search extends Component {
 
   render() {
     return (
-      <div className="container">
-        <h2>Search Users and Repositories</h2>
-        <form className="form-inline">
-          <label className="sr-only" htmlFor="inlineFormInputGroupUsername2">
-            GitHub Username
-          </label>
-          <div className="input-group mb-2 mr-sm-2">
-            <div className="input-group-prepend">
-              <div className="input-group-text">
-                <span>👻</span>
+      <div>
+        <Navigation />
+
+        <div className="container">
+          <h2>Search Users and Repositories</h2>
+          <form className="form-inline">
+            <label className="sr-only" htmlFor="inlineFormInputGroupUsername2">
+              GitHub Username
+            </label>
+            <div className="input-group mb-2 mr-sm-2">
+              <div className="input-group-prepend">
+                <div className="input-group-text">
+                  <span>👻</span>
+                </div>
               </div>
+              <input
+                type="text"
+                value={this.state.username}
+                onChange={this._handleUserChange}
+                className="form-control"
+                id="inlineFormInputGroupUsername2"
+                placeholder="GitHub Username"
+              />
             </div>
+
+            <label className="sr-only" htmlFor="inlineFormInputName2">
+              Repository
+            </label>
             <input
               type="text"
-              value={this.state.username}
-              onChange={this._handleUserChange}
-              className="form-control"
-              id="inlineFormInputGroupUsername2"
-              placeholder="GitHub Username"
+              value={this.state.repository}
+              onChange={this._handleRepoChange}
+              className="form-control mb-2 mr-sm-2"
+              id="inlineFormInputName2"
+              placeholder="Repository"
             />
-          </div>
 
-          <label className="sr-only" htmlFor="inlineFormInputName2">
-            Repository
-          </label>
-          <input
-            type="text"
-            value={this.state.repository}
-            onChange={this._handleRepoChange}
-            className="form-control mb-2 mr-sm-2"
-            id="inlineFormInputName2"
-            placeholder="Repository"
-          />
+            <input
+              className="form-control mb-2 mr-sm-2"
+              type="date"
+              min="2016-01-01"
+              value={this.state.startDate}
+              onChange={this._handleStartDateChange}
+            />
+            <input
+              className="form-control mb-2 mr-sm-2"
+              type="date"
+              value={this.state.endDate}
+              onChange={this._handleEndDateChange}
+            />
 
-          <input
-            className="form-control mb-2 mr-sm-2"
-            type="date"
-            min="2016-01-01"
-            value={this.state.startDate}
-            onChange={this._handleStartDateChange}
-          />
-          <input
-            className="form-control mb-2 mr-sm-2"
-            type="date"
-            value={this.state.endDate}
-            onChange={this._handleEndDateChange}
-          />
-
-          <button
-            type="submit"
-            className="btn btn-primary mb-2"
-            onClick={this._selectRepo}
-            onChange={this._handleRepoChange}
-          >
-            Goto Repo
-          </button>
-        </form>
-        <h4>Repository list</h4>
-        <RepoList username={this.state.username} />
+            <button
+              type="submit"
+              className="btn btn-primary mb-2"
+              onClick={this._selectRepo}
+              onChange={this._handleRepoChange}
+            >
+              Goto Repo
+            </button>
+          </form>
+          <h4>Repository list</h4>
+          <RepoList username={this.state.username} />
+        </div>
       </div>
     );
   }
