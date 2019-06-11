@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import Github from "../../utils/GitHubAxios";
 
-class SoloCommitStats extends Component {
+class TotalCommitStats extends Component {
   constructor(props) {
     super();
     this.state = {
@@ -47,7 +47,7 @@ class SoloCommitStats extends Component {
   }
 }
 
-export default SoloCommitStats;
+export default TotalCommitStats;
 
 // axios.get(`https://api.github.com/repos/${username}/${repo}/commits`).then(result => {
 //   result.data.forEach(commit => {

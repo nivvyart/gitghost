@@ -5,12 +5,7 @@ import Project from "./components/Project";
 import { ApolloProvider } from "react-apollo";
 import client from "./utils/GitHubGQL";
 
-import {
-  HashRouter as Router,
-  Route,
-  Redirect,
-  Switch
-} from "react-router-dom";
+import { HashRouter as Router, Route } from "react-router-dom";
 
 class Routes extends Component {
   constructor() {

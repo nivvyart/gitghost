@@ -1,8 +1,4 @@
 import React, { Component } from "react";
-import ApolloProvider from "react-apollo";
-import { Query } from "react-apollo";
-import { gql } from "apollo-boost";
-import { Route, Redirect } from "react-router-dom";
 import moment from "moment";
 
 import RepoList from "./stats/RepoList";
@@ -64,7 +60,9 @@ class Search extends Component {
           </label>
           <div className="input-group mb-2 mr-sm-2">
             <div className="input-group-prepend">
-              <div className="input-group-text">👻</div>
+              <div className="input-group-text">
+                <span>👻</span>
+              </div>
             </div>
             <input
               type="text"

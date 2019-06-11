@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Query } from "react-apollo";
 import { gql } from "apollo-boost";
 
-import { ChartDonut, ChartLegend } from "@patternfly/react-charts";
+import { ChartDonut } from "@patternfly/react-charts";
 
 class OpenPullRequests extends Component {
   constructor(props) {
@@ -73,23 +73,17 @@ class OpenPullRequests extends Component {
             var stats = this.processData(data);
           }
           return (
-            <div className="smallPlease">
-              <div className="pf-c-card">
-                <div className="pf-c-card__body">
-                  <div className="donut-chart-inline">
-                    <div className="donut-chart-container">
-                      <ChartDonut
-                        data={[
-                          { x: "Open Requests", y: stats.openRequests },
-                          { x: "Closed Requests", y: stats.closedRequests }
-                        ]}
-                        labels={datum => `${datum.x}: ${datum.y}`}
-                        subTitle="Total Pull Requests"
-                        title={stats.openRequests + stats.closedRequests}
-                      />
-                    </div>
-                  </div>
-                </div>
+            <div className="donut-chart-inline">
+              <div className="donut-chart-container">
+                <ChartDonut
+                  data={[
+                    { x: "Open Requests", y: stats.openRequests },
+                    { x: "Closed Requests", y: stats.closedRequests }
+                  ]}
+                  labels={datum => `${datum.x}: ${datum.y}`}
+                  subTitle={stats.openRequests}
+                  title="Pull Requests"
+                />
               </div>
             </div>
           );

@@ -16,7 +16,7 @@ const Github = {
 
   getUserRepo(username, repo) {
     return axios.get(
-      `https://api.github.com/repos/${username}/${repo}/commits`
+      `https://api.github.com/repos/${username}/${repo}/commits?client_id=4ec1b8f9c149f7c46ffd&client_secret=a05ec287c29ebd9633131b5a08298530709130e9`
     );
   }
 };

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import Github from "../../utils/GitHubAxios";
 
-class SoloRefactor extends Component {
+class SoloCommits extends Component {
   constructor(props) {
     super();
     this.state = {
@@ -28,7 +28,7 @@ class SoloRefactor extends Component {
             console.log(
               result.data.commit.author.date,
               result.data.author.login,
-              result.data.stats.deletions
+              result.data.stats.additions
             );
           });
       });
@@ -38,14 +38,14 @@ class SoloRefactor extends Component {
   render() {
     return (
       <div>
-        <h1>Refactor King</h1>
-        <p>some query</p>
+        <h1>Speed Demon</h1>
+        <p> some query</p>
       </div>
     );
   }
 }
 
-export default SoloRefactor;
+export default SoloCommits;
 
 // axios.get(`https://api.github.com/repos/${username}/${repo}/commits`).then(result => {
 //   result.data.forEach(commit => {
