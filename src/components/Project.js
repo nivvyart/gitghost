@@ -14,6 +14,7 @@ import SoloCommits from "./stats/SoloCommits";
 import IssuesClosed from "./stats/IssuesClosed";
 import ProjectTitle from "./stats/ProjectTitle";
 import Languages from "./stats/Languages";
+import RepoSize from "./stats/RepoSize";
 
 //check out moment.js
 
@@ -102,6 +103,14 @@ class Project extends Component {
                     repository={this.props.match.params.repository}
                     startDate={this.props.match.params.startDate}
                     endDate={this.props.match.params.endDate}
+                  />
+                </div>
+              </div>
+              <div className="pf-c-card">
+                <div className="pf-c-card__body">
+                  <RepoSize
+                    username={this.props.match.params.username}
+                    repository={this.props.match.params.repository}
                   />
                 </div>
               </div>

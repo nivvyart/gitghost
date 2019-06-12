@@ -19,7 +19,7 @@ class Languages extends Component {
         query={gql`
           {
             repository(owner: "danger", name: "peril") {
-              languages(last: 20) {
+              languages(last: 30) {
                 edges {
                   node {
                     id
