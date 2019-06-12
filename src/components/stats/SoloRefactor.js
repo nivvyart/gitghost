@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import axios from "axios";
 import Github from "../../utils/GitHubAxios";
 
+import { Query } from "react-apollo";
+import { gql } from "apollo-boost";
+
 class SoloRefactor extends Component {
   constructor(props) {
     super();
@@ -10,7 +13,9 @@ class SoloRefactor extends Component {
       startDate: new Date(props.startDate).toISOString(),
       endDate: props.endDate + "T23:59:59.999Z",
       username: props.username,
-      repository: props.repository
+      repository: props.repository,
+      winner: "",
+      highScore: 0
     };
   }
 
@@ -18,38 +23,113 @@ class SoloRefactor extends Component {
     const username = this.state.username;
     const repository = this.state.repository;
 
+    const requests = [];
+
     Github.getUserRepo(username, repository).then(result => {
       result.data.forEach(commit => {
-        axios
-          .get(
-            `https://api.github.com/repos/${username}/${repository}/commits/${
-              commit.sha
-            }`
-          )
-          .then(result => {
-            let data;
-            if (
-              result.data.commit.author.date > this.state.startDate &&
-              result.data.commit.author.date < this.state.endDate
-            ) {
-              data = {
-                author: result.data.author.login,
-                deletions: result.data.stats.deletions
-              };
-              this.setState({ results: [...this.state.results, data] });
-            }
-          });
+        requests.push(
+          axios
+            .get(
+              `https://api.github.com/repos/${username}/${repository}/commits/${
+                commit.sha
+              }`
+            )
+            .then(result => {
+              let data;
+              if (
+                result.data.commit.author.date > this.state.startDate &&
+                result.data.commit.author.date < this.state.endDate
+              ) {
+                data = {
+                  author: result.data.author.login,
+                  deletions: result.data.stats.deletions
+                };
+                this.setState({ results: [...this.state.results, data] });
+              }
+            })
+        );
+      });
+      Promise.all(requests).then(() => {
+        console.log("all data fetched");
+        console.log(this.state.results); // should now be complete
+        // TODO: call findHighest
+        this.findHigest();
       });
     });
+  }
+
+  findHigest() {
+    console.log("findhighest called");
+    let testing = {};
+
+    this.state.results.forEach(el => {
+      if (!testing[el.author]) {
+        testing[el.author] = el.deletions;
+      } else {
+        testing[el.author] += el.deletions;
+      }
+    });
+    let winner = Object.keys(testing).reduce((a, b) =>
+      testing[a] > testing[b] ? a : b
+    );
+    this.setState({ winner: winner });
+    this.setState({ highScore: testing[winner] });
   }
 
   render() {
     if (!this.state.results) return <p>loading...</p>;
     return (
-      <div>
-        <h1>Refactor King</h1>
-        <p>some query</p>
-      </div>
+      <Query
+        query={gql`
+          {
+            user(login: "${this.state.winner}") {
+              avatarUrl
+              url
+
+              followers {
+                totalCount
+              }
+              starredRepositories {
+                totalCount
+              }
+            }
+          }
+        `}
+      >
+        {({ loading, error, data }) => {
+          if (loading) return <p>Loading...</p>;
+          if (error) return <p>Error </p>;
+
+          if (data)
+            return (
+              <div>
+                <div class="row mt-3 border">
+                  <div class="col-md-4 ">
+                    <img src={data.user.avatarUrl} />
+                  </div>
+                  <div class="col-md-8 card-body ">
+                    <h3 className="font-weight-bold">Refactor King</h3>
+                    <a target="_blank" href={data.user.url}>
+                      <h5>{this.state.winner}</h5>
+                    </a>
+                    <ul class="list-inline">
+                      <li class="list-inline-item">
+                        Refactor total - {this.state.highScore}
+                      </li>
+                      <li class="list-inline-item">
+                        Followers - {data.user.followers.totalCount}
+                      </li>
+                      <li class="list-inline-item">
+                        Starred Repositories -
+                        {data.user.starredRepositories.totalCount}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            );
+        }}
+      </Query>
     );
   }
 }

@@ -12,6 +12,7 @@ import TotalCommitStats from "./stats/TotalCommitStats";
 import SoloRefactor from "./stats/SoloRefactor";
 import SoloCommits from "./stats/SoloCommits";
 import IssuesClosed from "./stats/IssuesClosed";
+import ProjectTitle from "./stats/ProjectTitle";
 
 //check out moment.js
 
@@ -25,18 +26,18 @@ class Project extends Component {
           <Grid gutter="md">
             <GridItem span={6}>
               <div className="pf-c-card">
-                1. span = 6
                 <div className="pf-c-card__body">
-                  This is the project screen for{" "}
-                  {this.props.match.params.repository} date range
-                  {this.props.match.params.startDate} =>
-                  {this.props.match.params.endDate}
+                  <ProjectTitle
+                    username={this.props.match.params.username}
+                    repository={this.props.match.params.repository}
+                    startDate={this.props.match.params.startDate}
+                    endDate={this.props.match.params.endDate}
+                  />
                 </div>
               </div>
             </GridItem>
             <GridItem span={3}>
               <div className="pf-c-card">
-                2. span = 3
                 <div className="pf-c-card__body">
                   <SoloCommits
                     username={this.props.match.params.username}
@@ -49,7 +50,6 @@ class Project extends Component {
             </GridItem>
             <GridItem span={3}>
               <div className="pf-c-card">
-                3. span = 3
                 <div className="pf-c-card__body">
                   <SoloRefactor
                     username={this.props.match.params.username}
@@ -93,7 +93,6 @@ class Project extends Component {
             </GridItem>
             <GridItem span={2}>
               <div className="pf-c-card">
-                8. span = 2
                 <div className="pf-c-card__body">
                   <OpenPullRequests
                     username={this.props.match.params.username}
@@ -106,7 +105,6 @@ class Project extends Component {
             </GridItem>
             <GridItem span={2}>
               <div className="pf-c-card">
-                9. span = 2
                 <div className="pf-c-card__body">
                   <IssuesClosed
                     username={this.props.match.params.username}
@@ -119,16 +117,18 @@ class Project extends Component {
             </GridItem>
             <GridItem span={2}>
               <div className="pf-c-card">
-                10. span = 2
                 <div className="pf-c-card__body">
                   <img src="http://fillmurray.com/400/400" alt="" />
                 </div>
               </div>
             </GridItem>
-            <GridItem span={4}>11. span = 4</GridItem>
+            <GridItem span={4}>
+              <div className="pf-c-card">
+                <div className="pf-c-card__body">11. span = 4</div>
+              </div>
+            </GridItem>
             <GridItem span={2}>
               <div className="pf-c-card">
-                12. span = 2
                 <div className="pf-c-card__body">
                   <img src="http://fillmurray.com/400/400" alt="" />
                 </div>

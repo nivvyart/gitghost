@@ -7,15 +7,15 @@ const RepoList = props => (
     pollInterval={1000}
     query={gql`
       {
-        user(login: "${props.username}") {
-          repositories(last: 8) {
-            edges {
-              node {
-                name
-                createdAt
-                url
-              }
-            }
+        user(login: "nivvyart") {
+          avatarUrl
+          resourcePath
+
+          followers {
+            totalCount
+          }
+          starredRepositories {
+            totalCount
           }
         }
       }

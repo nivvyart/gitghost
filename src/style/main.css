@@ -14,3 +14,8 @@
   background-color: khaki;
   padding: 2em;
 }
+
+.smallPlease {
+  max-width: 70px;
+  max-height: 70px;
+}

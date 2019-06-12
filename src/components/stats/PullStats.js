@@ -7,7 +7,8 @@ import {
   ChartBar,
   ChartStack,
   ChartThemeColor,
-  ChartThemeVariant
+  ChartThemeVariant,
+  ChartAxis
 } from "@patternfly/react-charts";
 
 class PullStats extends Component {
@@ -23,7 +24,7 @@ class PullStats extends Component {
   render() {
     return (
       <div className="stack-chart-container">
-        <h2>Pull Requests Total</h2>
+        <p className="h5">Pull Requests Total</p>
         <Query
           query={gql`
                     {
@@ -71,6 +72,11 @@ class PullStats extends Component {
                       />
                     ))}
                 </ChartStack>
+                <ChartAxis style={{ tickLabels: { fontSize: 10 } }} />
+                <ChartAxis
+                  dependentAxis
+                  style={{ tickLabels: { fontSize: 10 } }}
+                />
               </Chart>
             );
           }}
@@ -81,3 +87,6 @@ class PullStats extends Component {
 }
 
 export default PullStats;
+
+//
+// </ChartAxis>

@@ -65,12 +65,18 @@ class TotalCommitStats extends Component {
 
     return (
       <div>
+        <p className="h5">Commit Totals</p>
         <div className="line-chart-inline">
           <div className="line-chart-container">
             <Chart themeColor={ChartThemeColor.blue}>
               <ChartGroup>
                 <ChartLine data={points} />
               </ChartGroup>
+              <ChartAxis style={{ tickLabels: { fontSize: 10 } }} />
+              <ChartAxis
+                dependentAxis
+                style={{ tickLabels: { fontSize: 10 } }}
+              />
             </Chart>
           </div>
         </div>
