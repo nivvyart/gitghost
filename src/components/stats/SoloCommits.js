@@ -113,14 +113,13 @@ class SoloCommits extends Component {
                     </a>
                     <ul class="list-inline">
                       <li class="list-inline-item">
-                        Commits total - {this.state.highScore}
+                        Commits total: {this.state.highScore}
                       </li>
                       <li class="list-inline-item">
-                        Followers - {data.user.followers.totalCount}
+                        Followers: {data.user.followers.totalCount}
                       </li>
                       <li class="list-inline-item">
-                        Starred Repositories -
-                        {data.user.starredRepositories.totalCount}
+                        Starred Repositories: {data.user.starredRepositories.totalCount}
                       </li>
                     </ul>
                   </div>

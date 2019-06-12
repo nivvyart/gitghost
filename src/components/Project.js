@@ -13,6 +13,7 @@ import SoloRefactor from "./stats/SoloRefactor";
 import SoloCommits from "./stats/SoloCommits";
 import IssuesClosed from "./stats/IssuesClosed";
 import ProjectTitle from "./stats/ProjectTitle";
+import Languages from "./stats/Languages";
 
 //check out moment.js
 
@@ -72,33 +73,7 @@ class Project extends Component {
                 </div>
               </div>
             </GridItem>
-            <GridItem span={4}>
-              <div className="pf-c-card">
-                <div className="pf-c-card__body">
-                  <img src="http://fillmurray.com/400/400" alt="" />
-                </div>
-              </div>
-            </GridItem>
-            <GridItem span={4} rowSpan={1}>
-              <div className="pf-c-card">
-                <div className="pf-c-card__body">
-                  <PullStats
-                    username={this.props.match.params.username}
-                    repository={this.props.match.params.repository}
-                    startDate={this.props.match.params.startDate}
-                    endDate={this.props.match.params.endDate}
-                  />
-                </div>
-              </div>
-            </GridItem>
-            <GridItem span={2}>
-              <div className="pf-c-card">
-                <div className="pf-c-card__body">
-                  Readme Link/modal
-                  <img src="http://fillmurray.com/400/400" alt="" />
-                </div>
-              </div>
-            </GridItem>
+
             <GridItem span={2}>
               <div className="pf-c-card">
                 <div className="pf-c-card__body">
@@ -107,6 +82,14 @@ class Project extends Component {
                     repository={this.props.match.params.repository}
                     startDate={this.props.match.params.startDate}
                     endDate={this.props.match.params.endDate}
+                  />
+                </div>
+              </div>
+              <div className="pf-c-card">
+                <div className="pf-c-card__body">
+                  <Languages
+                    username={this.props.match.params.username}
+                    repository={this.props.match.params.repository}
                   />
                 </div>
               </div>
@@ -123,16 +106,21 @@ class Project extends Component {
                 </div>
               </div>
             </GridItem>
-            <GridItem span={4}>
-              <div className="pf-c-card">
-                <div className="pf-c-card__body">11. span = 4</div>
-              </div>
-            </GridItem>
-            <GridItem span={2}>
+            <GridItem span={4} rowSpan={1}>
               <div className="pf-c-card">
                 <div className="pf-c-card__body">
-                  <img src="http://fillmurray.com/400/400" alt="" />
+                  <PullStats
+                    username={this.props.match.params.username}
+                    repository={this.props.match.params.repository}
+                    startDate={this.props.match.params.startDate}
+                    endDate={this.props.match.params.endDate}
+                  />
                 </div>
+              </div>
+            </GridItem>
+            <GridItem span={8}>
+              <div className="pf-c-card">
+                <div className="pf-c-card__body">11. span = 4</div>
               </div>
             </GridItem>
           </Grid>
