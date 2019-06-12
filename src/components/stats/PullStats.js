@@ -28,8 +28,10 @@ class PullStats extends Component {
         <Query
           query={gql`
                     {
-                      user(login: "${this.state.username}") {
-                        repository(name: "${this.state.repository}") {
+
+                        repository(owner: "${this.state.username}", name: "${
+            this.state.repository
+          }") {
                           pullRequests(last: 30) {
                             edges {
                               node {
@@ -44,7 +46,7 @@ class PullStats extends Component {
                             }
                           }
                         }
-                      }
+
                     }
                   `}
         >
@@ -57,7 +59,7 @@ class PullStats extends Component {
                 themeVariant={ChartThemeVariant.light}
               >
                 <ChartStack domainPadding={{ x: [10, 2] }} horizontal>
-                  {data.user.repository.pullRequests.edges
+                  {data.repository.pullRequests.edges
                     .filter(
                       ({ node }) =>
                         node.createdAt > this.state.startDate &&
