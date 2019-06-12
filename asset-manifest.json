@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/gitghost/static/css/main.15b4d574.chunk.css",
+    "main.js": "/gitghost/static/js/main.349c5fba.chunk.js",
+    "main.js.map": "/gitghost/static/js/main.349c5fba.chunk.js.map",
+    "runtime~main.js": "/gitghost/static/js/runtime~main.5eba4c87.js",
+    "runtime~main.js.map": "/gitghost/static/js/runtime~main.5eba4c87.js.map",
+    "static/css/2.1037826a.chunk.css": "/gitghost/static/css/2.1037826a.chunk.css",
+    "static/js/2.e9eae047.chunk.js": "/gitghost/static/js/2.e9eae047.chunk.js",
+    "static/js/2.e9eae047.chunk.js.map": "/gitghost/static/js/2.e9eae047.chunk.js.map",
+    "index.html": "/gitghost/index.html",
+    "precache-manifest.6fe5c03680d9f11c9e788c1a774350d4.js": "/gitghost/precache-manifest.6fe5c03680d9f11c9e788c1a774350d4.js",
+    "service-worker.js": "/gitghost/service-worker.js",
+    "static/css/2.1037826a.chunk.css.map": "/gitghost/static/css/2.1037826a.chunk.css.map",
+    "static/css/main.15b4d574.chunk.css.map": "/gitghost/static/css/main.15b4d574.chunk.css.map",
+    "static/media/main.css": "/gitghost/static/media/background.a3a18db6.jpg",
+    "static/media/image.png": "/gitghost/static/media/image.43b60ef3.png",
+    "static/media/base.css": "/gitghost/static/media/pficon.f907e666.ttf",
+    "static/media/background-image.css": "/gitghost/static/media/pfbg_768@2x.0099dea3.jpg",
+    "static/media/about-modal-box.css": "/gitghost/static/media/pfbg_992@2x.1423e11e.jpg"
+  }
+}
