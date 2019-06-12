@@ -21,7 +21,6 @@ class IssuesClosed extends Component {
       return this.state.processedData;
     }
 
-    console.log("top level data", data);
     let open = 0;
     let newOpen = 0;
     let closedWithinDate = 0;
@@ -47,7 +46,6 @@ class IssuesClosed extends Component {
       }
     });
 
-    console.log("this is the data", open, newOpen, closedWithinDate);
     return {
       openIssues: open - newOpen,
       newIssues: newOpen,

@@ -51,8 +51,6 @@ class SoloCommits extends Component {
         );
       });
       Promise.all(requests).then(() => {
-        console.log("all data fetched");
-        console.log(this.state.results); // should now be complete
         // TODO: call findHighest
         this.findHigest();
       });
@@ -60,7 +58,6 @@ class SoloCommits extends Component {
   }
 
   findHigest() {
-    console.log("findhighest called");
     let testing = {};
 
     this.state.results.forEach(el => {

@@ -41,7 +41,6 @@ class Search extends Component {
 
   //need to add a default search value here if those fields are not added.
   _selectRepo() {
-    console.log(this.state.username, this.state.repository);
     this.props.history.push(
       `/project/${this.state.username}/${this.state.repository}/${
         this.state.startDate
