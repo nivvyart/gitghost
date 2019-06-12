@@ -6,6 +6,7 @@ import moment from "moment";
 
 const RepoList = props => (
   <Query
+    pollInterval={500}
     query={gql`
                 {
                   user(login: "${props.username}") {

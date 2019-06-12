@@ -94,6 +94,14 @@ class Project extends Component {
             <GridItem span={2}>
               <div className="pf-c-card">
                 <div className="pf-c-card__body">
+                  Readme Link/modal
+                  <img src="http://fillmurray.com/400/400" alt="" />
+                </div>
+              </div>
+            </GridItem>
+            <GridItem span={2}>
+              <div className="pf-c-card">
+                <div className="pf-c-card__body">
                   <OpenPullRequests
                     username={this.props.match.params.username}
                     repository={this.props.match.params.repository}
@@ -112,13 +120,6 @@ class Project extends Component {
                     startDate={this.props.match.params.startDate}
                     endDate={this.props.match.params.endDate}
                   />
-                </div>
-              </div>
-            </GridItem>
-            <GridItem span={2}>
-              <div className="pf-c-card">
-                <div className="pf-c-card__body">
-                  <img src="http://fillmurray.com/400/400" alt="" />
                 </div>
               </div>
             </GridItem>
