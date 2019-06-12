@@ -12,6 +12,7 @@ const ProjectTitle = props => {
       <p className="h5">
         Date Range :
         <span className="text-muted">
+          {" "}
           {props.startDate} > {props.endDate}
         </span>
       </p>
