@@ -67,6 +67,7 @@ class PullStats extends Component {
                     )
                     .map(({ node }, index) => (
                       <ChartBar
+                        key={index}
                         data={[
                           { x: node.author.login, y: node.additions },
                           { x: node.author.login, y: node.deletions }

@@ -56,7 +56,7 @@ class Search extends Component {
         <Navigation />
 
         <div className="container">
-          <h2>Search Users and Repositories</h2>
+          <h2 className="h2 padding-top">Search Users and Repositories</h2>
           <form className="form-inline">
             <label className="sr-only" htmlFor="inlineFormInputGroupUsername2">
               GitHub Username

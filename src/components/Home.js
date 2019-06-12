@@ -10,15 +10,15 @@ class Home extends React.Component {
   render() {
     return (
       <Bullseye>
-        <div>
+        <div className="padding-top">
           <div className="card text-center">
             <div className="card-body">
-              <h1 className="card-title">Welcome to GitGhost</h1>
+              <h1 className="h1">Welcome to GitGhost</h1>
               <img src={require("./image.png")} alt="" />
 
               <p className="card-text">
-                With supporting text below as a natural lead-in to additional
-                content.
+                Search GitHub Users and repositories to get insite into your
+                projects!
               </p>
 
               <a href="#/search" className="btn btn-primary">

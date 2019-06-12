@@ -100,24 +100,25 @@ class SoloRefactor extends Component {
           if (data)
             return (
               <div>
-                <div class="row mt-3 border">
-                  <div class="col-md-4 ">
-                    <img src={data.user.avatarUrl} />
+                <div className="row mt-3 border">
+                  <div className="col-md-4 ">
+                    <img src={data.user.avatarUrl} alt={this.state.winner} />
                   </div>
-                  <div class="col-md-8 card-body ">
+                  <div className="col-md-8 card-body ">
                     <h3 className="font-weight-bold">Refactor King</h3>
                     <a target="_blank" href={data.user.url}>
                       <h5>{this.state.winner}</h5>
                     </a>
-                    <ul class="list-inline">
-                      <li class="list-inline-item">
+                    <ul className="list-inline">
+                      <li className="list-inline-item">
                         Refactor total: {this.state.highScore}
                       </li>
-                      <li class="list-inline-item">
+                      <li className="list-inline-item">
                         Followers: {data.user.followers.totalCount}
                       </li>
-                      <li class="list-inline-item">
-                        Starred Repositories: {data.user.starredRepositories.totalCount}
+                      <li className="list-inline-item">
+                        Starred Repositories:{" "}
+                        {data.user.starredRepositories.totalCount}
                       </li>
                     </ul>
                   </div>

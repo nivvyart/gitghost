@@ -6,7 +6,6 @@ import {
   Chart,
   ChartAxis,
   ChartGroup,
-  ChartLegend,
   ChartLine,
   ChartThemeColor
 } from "@patternfly/react-charts";

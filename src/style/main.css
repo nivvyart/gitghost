@@ -6,6 +6,14 @@
   min-height: 400px;
 } */
 
+body {
+  background-image: url(./background.jpg);
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .project-container {
   top: 0;
   left: 0;
@@ -14,6 +22,6 @@
   padding: 2em;
 }
 
-body {
-  background-color: lightgrey;
+.padding-top {
+  padding-top: 9vh;
 }

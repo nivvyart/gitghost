@@ -40,9 +40,9 @@ class RepoSize extends Component {
   }
 
   render() {
-    const { spacer, used } = this.state;
     return (
       <div>
+        Disk Usage
         <div className="donut-utilization-chart">
           <ChartDonutUtilization
             data={{ x: "MB's capacity", y: this.state.dataPercent }}

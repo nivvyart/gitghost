@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Grid, GridItem, Button } from "@patternfly/react-core";
+import { Grid, GridItem } from "@patternfly/react-core";
 
 import "../style/main.css";
 
@@ -127,9 +127,9 @@ class Project extends Component {
                 </div>
               </div>
             </GridItem>
-            <GridItem span={8}>
+            <GridItem span={12}>
               <div className="pf-c-card">
-                <div className="pf-c-card__body">11. span = 4</div>
+                <div className="pf-c-card__body" />
               </div>
             </GridItem>
           </Grid>

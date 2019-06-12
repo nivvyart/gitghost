@@ -48,23 +48,23 @@ const ProjectTitle = props => {
 
           if (data)
             return (
-              <ul class="list-inline">
-                <li class="list-inline-item">
+              <ul className="list-inline">
+                <li className="list-inline-item">
                   <a href="{data.repository.url}" target="_blank">
                     Link
                   </a>
                 </li>
-                <li class="list-inline-item">| Created - {age} |</li>
-                <li class="list-inline-item">
+                <li className="list-inline-item">| Created - {age} |</li>
+                <li className="list-inline-item">
                   forkCount - {data.repository.forkCount} |
                 </li>
-                <li class="list-inline-item">
+                <li className="list-inline-item">
                   <a>⭐</a> Count - {data.repository.stargazers.totalCount} |
                 </li>
-                <li class="list-inline-item">
+                <li className="list-inline-item">
                   Main Language - {data.repository.primaryLanguage.name} |
                 </li>
-                <li class="list-inline-item">
+                <li className="list-inline-item">
                   <a>🧐</a> Watchers - {data.repository.watchers.totalCount} |
                 </li>
               </ul>

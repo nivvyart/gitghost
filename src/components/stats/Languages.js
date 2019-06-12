@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { gql } from "apollo-boost";
 import { Query } from "react-apollo";
 
-import { ChartLegend, ChartPie } from "@patternfly/react-charts";
+import { ChartPie } from "@patternfly/react-charts";
 
 class Languages extends Component {
   constructor(props) {
@@ -46,6 +46,7 @@ class Languages extends Component {
 
           return (
             <div>
+              <h3>Languages Used</h3>
               <div className="pie-chart-inline">
                 <div className="pie-chart-container">
                   <ChartPie
