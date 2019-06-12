@@ -26,7 +26,7 @@ class IssuesClosed extends Component {
     let newOpen = 0;
     let closedWithinDate = 0;
 
-    const processedData = data.user.repository.issues.edges.map(({ node }) => {
+    const processedData = data.repository.issues.edges.map(({ node }) => {
       if (
         node.state === "OPEN" && //if the issues state is open
         node.createdAt > this.state.startDate && // and the issue is older than the defined window
@@ -60,8 +60,10 @@ class IssuesClosed extends Component {
       <Query
         query={gql`
           {
-            user(login: "${this.state.username}") {
-              repository(name: "${this.state.repository}") {
+
+              repository(owner: "${this.state.username}", name: "${
+          this.state.repository
+        }") {
                 issues(last: 50) {
                   edges {
                     node {
@@ -71,7 +73,7 @@ class IssuesClosed extends Component {
                     }
                   }
                 }
-              }
+
             }
           }
         `}
