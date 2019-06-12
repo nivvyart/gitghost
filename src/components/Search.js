@@ -114,7 +114,19 @@ class Search extends Component {
             </button>
           </form>
           <h4>Repository list</h4>
-          <RepoList username={this.state.username} />
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Created At</th>
+                <th scope="col">External Link</th>
+              </tr>
+            </thead>
+            <tbody>
+              <RepoList username={this.state.username} />
+            </tbody>
+          </table>
         </div>
       </div>
     );

@@ -54,18 +54,18 @@ const ProjectTitle = props => {
                     Link
                   </a>
                 </li>
-                <li class="list-inline-item">Created - {age}</li>
+                <li class="list-inline-item">| Created - {age} |</li>
                 <li class="list-inline-item">
-                  forkCount - {data.repository.forkCount}
+                  forkCount - {data.repository.forkCount} |
                 </li>
                 <li class="list-inline-item">
-                  Stars - {data.repository.stargazers.totalCount}
+                  <a>⭐</a> Count - {data.repository.stargazers.totalCount} |
                 </li>
                 <li class="list-inline-item">
-                  primaryLanguage - {data.repository.primaryLanguage.name}
+                  Main Language - {data.repository.primaryLanguage.name} |
                 </li>
                 <li class="list-inline-item">
-                  watchers - {data.repository.watchers.totalCount}
+                  <a>🧐</a> Watchers - {data.repository.watchers.totalCount} |
                 </li>
               </ul>
             );

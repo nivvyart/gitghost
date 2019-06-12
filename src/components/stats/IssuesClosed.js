@@ -92,7 +92,7 @@ class IssuesClosed extends Component {
                     { x: "Closed Within Sprint", y: stats.sprintClosed }
                   ]}
                   labels={datum => `${datum.x}: ${datum.y}`}
-                  subTitle="For Date Range"
+                  subTitle={stats.newIssues}
                   title="Issues Summary"
                 />
               </div>

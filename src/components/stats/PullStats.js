@@ -72,7 +72,9 @@ class PullStats extends Component {
                       />
                     ))}
                 </ChartStack>
-                <ChartAxis style={{ tickLabels: { fontSize: 10 } }} />
+                <ChartAxis
+                  style={{ tickLabels: { padding: 1, fontSize: 9 } }}
+                />
                 <ChartAxis
                   dependentAxis
                   style={{ tickLabels: { fontSize: 10 } }}
