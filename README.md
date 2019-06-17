@@ -21,6 +21,16 @@ update utils/GitHubGQL.js ${token} with your github auth token.  [Link - How to 
 
 `npm start`
 
+### Site map
+Couple quick Gif videos of the site in action:
+
+[Search Page](https://i.imgur.com/oJm32hG.gifv)
+Shows the last 10 projects that the user has been working on, link will take you to the page on githubs site.
+
+[Project page](https://i.imgur.com/Yt07ihy.gifv)
+Once the date range has been set, summary page is provided with details of open/closed issues, total commits over the time period, pull request status and more.
+
+
 ### Shortterm Roadmap
 This is an ongoing project, next steps:
 
