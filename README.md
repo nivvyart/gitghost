@@ -4,11 +4,12 @@
 - connects to Githubs Graphql endpoint to provide statistics.
 - Provides details such as: Commit Totals by team/colaborator, refactor totals, issue status, pull request status and more.
 
-### Libraries
-- react
-- Bootstrap
-- Patternfly
-- Apollo
+### Libraries & Tools
+- [react](https://reactjs.org/)
+- [Bootstrap](https://getbootstrap.com/)
+- [Patternfly](https://www.patternfly.org/)
+- [Apollo](https://www.apollographql.com/)
+- [github graphQL](https://developer.github.com/v4/)
 
 ### Getting started
 Run locally with:
