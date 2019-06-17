@@ -1,8 +1,8 @@
 ## gitghost 1.0
-- GA - Sydney Second project - Presented on 13/06/19
+- GA - Sydney final project - Presented on 13/06/19
 - A webapp to give Project Managers or Team leads a quick overview of projects hosted on Github.
-- connects to Githubs Graphql endpoint to provide details.
-- Gives details such as: Commit Totals by team/colaborator, refactor totals, issue status, pull request status and more.
+- connects to Githubs Graphql endpoint to provide statistics.
+- Provides details such as: Commit Totals by team/colaborator, refactor totals, issue status, pull request status and more.
 
 ### Libraries
 - react
@@ -31,7 +31,7 @@ Shows the last 10 projects that the user has been working on, link will take you
 Once the date range has been set, summary page is provided with details of open/closed issues, total commits over the time period, pull request status and more.
 
 
-### Shortterm Roadmap
+### Short term Roadmap
 This is an ongoing project, next steps:
 
 - Node backend to save queries
