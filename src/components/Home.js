@@ -13,7 +13,7 @@ class Home extends React.Component {
         <div className="padding-top">
           <div className="card text-center">
             <div className="card-body">
-              <h1 className="h1">Welcome to GitGhost</h1>
+              <h1 className="h1">Welcome to GitGhost - Dev mode on</h1>
               <img src={require("./image.png")} alt="" />
 
               <p className="card-text">
