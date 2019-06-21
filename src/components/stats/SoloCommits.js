@@ -72,24 +72,34 @@ class SoloCommits extends Component {
     );
     this.setState({ winner: winner });
     this.setState({ highScore: testing[winner] });
+    this.setState({ winnerURL:})
   }
 
   render() {
-    if (!this.state.winner) return <p>loading...</p>;
-
     return (
       <Query
         query={gql`
           {
-            user(login: "${this.state.winner}") {
-              avatarUrl
-              url
-
-              followers {
-                totalCount
-              }
-              starredRepositories {
-                totalCount
+            repository(owner: "${this.state.username}", name: "${
+          this.state.repository
+        }") {
+              defaultBranchRef {
+                target {
+                  ... on Commit {
+                    history(
+                      since: "${this.state.startDate}"
+                      until: "${this.state.endDate}"
+                    ) {
+                      nodes {
+                        committedDate
+                        additions
+                        author {
+                          avatarUrl
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
