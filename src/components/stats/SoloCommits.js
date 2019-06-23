@@ -15,9 +15,9 @@ class SoloCommits extends Component {
       endDate: props.endDate + "T23:59:59.999Z",
       username: props.username,
       repository: props.repository,
-      winner: "me",
+      winner: "",
       highScore: 0,
-      winnerURL: "http://hi.com"
+      winnerURL: ""
     };
   }
 
@@ -28,22 +28,32 @@ class SoloCommits extends Component {
 
     data.repository.defaultBranchRef.target.history.nodes.forEach(el => {
       if (el.author.user != null) {
-        console.log(el.additions);
-        console.log(el.author.user.login);
+        //if testing user does not exist create it
+        if (!testing[el.author.user.login]) {
+          testing[el.author.user.login] = el.additions;
+        } else {
+          // if testing user does exist - add addition to previous user
+          testing[el.author.user.login] += el.additions;
+        }
+        // returns  - { key(username) : object(commit total) }
+        console.log(testing);
       }
+
+      // this.setState({ winnerURL: "winner" });
     });
-    // if (!testing[el.author]) {
-    //     testing[el.author] = el.additions;
-    //   } else {
-    //     testing[el.author] += el.additions;
-    //   }
-    // });
-    // let winner = Object.keys(testing).reduce((a, b) =>
-    //   testing[a] > testing[b] ? a : b
-    // );
+    let winner = Object.keys(testing).reduce((a, b) =>
+      testing[a] > testing[b] ? a : b
+    );
+
+    //returns winner and high score
+    console.log("winner, should only happen once", winner, testing[winner]);
+
+    //setting state here crashes react, you cant set the state multiple times from within the render
     // this.setState({ winner: winner });
     // this.setState({ highScore: testing[winner] });
-    // this.setState({ winnerURL: "winner" });
+
+    //i need an object here that has more that winner and commit total so i can use that to build the
+    // card, rather than recalling GQL like in the axios example
   }
 
   render() {
@@ -96,7 +106,7 @@ class SoloCommits extends Component {
             return (
               <div>
                 <h1>{this.state.winner}</h1>
-                <h2>{this.state.winnerURL}</h2>
+                <h2>{this.state.highScore}</h2>
               </div>
             );
         }}
