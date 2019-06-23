@@ -16,80 +16,81 @@ class SoloCommits extends Component {
       username: props.username,
       repository: props.repository,
       winner: "",
-      highScore: 0
+      highScore: 0,
+      winnerURL: ""
     };
   }
 
-  componentDidMount() {
-    const username = this.state.username;
-    const repository = this.state.repository;
-
-    const requests = [];
-
-    Github.getUserRepo(username, repository).then(result => {
-      result.data.forEach(commit => {
-        requests.push(
-          axios
-            .get(
-              `https://api.github.com/repos/${username}/${repository}/commits/${
-                commit.sha
-              }`
-            )
-            .then(result => {
-              let data;
-              if (
-                result.data.commit.author.date > this.state.startDate &&
-                result.data.commit.author.date < this.state.endDate
-              ) {
-                data = {
-                  author: result.data.author.login,
-                  additions: result.data.stats.additions
-                };
-                this.setState({ results: [...this.state.results, data] });
-              }
-            })
-        );
-      });
-      Promise.all(requests).then(() => {
-        // TODO: call findHighest
-        this.findHigest();
-      });
-    });
-  }
-
-  findHigest() {
+  findHigest(data) {
     let testing = {};
+    console.log(data);
+    console.log(data.repository.defaultBranchRef.target.history.nodes.length);
 
-    this.state.results.forEach(el => {
-      if (!testing[el.author]) {
-        testing[el.author] = el.additions;
-      } else {
-        testing[el.author] += el.additions;
+    data.repository.defaultBranchRef.target.history.nodes.forEach(el => {
+      if (el.author.user != null) {
+        //if testing user does not exist create it
+        if (!testing[el.author.user.login]) {
+          testing[el.author.user.login] = el.additions;
+        } else {
+          // if testing user does exist - add addition to previous user
+          testing[el.author.user.login] += el.additions;
+        }
+        // returns  - { key(username) : object(commit total) }
+        console.log(testing);
       }
+
+      // this.setState({ winnerURL: "winner" });
     });
     let winner = Object.keys(testing).reduce((a, b) =>
       testing[a] > testing[b] ? a : b
     );
-    this.setState({ winner: winner });
-    this.setState({ highScore: testing[winner] });
+
+    //returns winner and high score
+    console.log("winner, should only happen once", winner, testing[winner]);
+
+    //setting state here crashes react, you cant set the state multiple times from within the render
+    // this.setState({ winner: winner });
+    // this.setState({ highScore: testing[winner] });
+
+    //i need an object here that has more that winner and commit total so i can use that to build the
+    // card, rather than recalling GQL like in the axios example
   }
 
   render() {
-    if (!this.state.winner) return <p>loading...</p>;
-
     return (
       <Query
         query={gql`
           {
-            user(login: "${this.state.winner}") {
-              avatarUrl
-              url
-
-              followers {
-                totalCount
-              }
-              starredRepositories {
-                totalCount
+            repository(owner: "${this.state.username}", name: "${
+          this.state.repository
+        }") {
+              defaultBranchRef {
+                target {
+                  ... on Commit {
+                    history(
+                      since: "${this.state.startDate}"
+                      until: "${this.state.endDate}"
+                    ) {
+                      nodes {
+                        additions
+                        author {
+                          user {
+                            login
+                            url
+                            avatarUrl
+                            
+                            followers {
+                              totalCount
+                            }
+                            starredRepositories {
+                              totalCount
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -99,32 +100,13 @@ class SoloCommits extends Component {
           if (loading) return <p>Loading...</p>;
           if (error) return <p>Error </p>;
 
+          this.findHigest(data);
+
           if (data)
             return (
               <div>
-                <div className="row mt-3 border">
-                  <div className="col-md-4 ">
-                    <img src={data.user.avatarUrl} />
-                  </div>
-                  <div className="col-md-8 card-body ">
-                    <h3 className="font-weight-bold">Speed Demon</h3>
-                    <a target="_blank" href={data.user.url}>
-                      <h5>{this.state.winner}</h5>
-                    </a>
-                    <ul className="list-inline">
-                      <li className="list-inline-item">
-                        Commits total: {this.state.highScore}
-                      </li>
-                      <li className="list-inline-item">
-                        Followers: {data.user.followers.totalCount}
-                      </li>
-                      <li className="list-inline-item">
-                        Starred Repositories:{" "}
-                        {data.user.starredRepositories.totalCount}
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+                <h1>{this.state.winner}</h1>
+                <h2>{this.state.highScore}</h2>
               </div>
             );
         }}

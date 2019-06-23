@@ -28,7 +28,6 @@ class PullStats extends Component {
         <Query
           query={gql`
                     {
-
                         repository(owner: "${this.state.username}", name: "${
             this.state.repository
           }") {
