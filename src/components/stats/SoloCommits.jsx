@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
-import Github from "../../utils/GitHubAxios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Query } from "react-apollo";
