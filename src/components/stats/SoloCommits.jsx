@@ -1,21 +1,20 @@
-import React, { Component } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, { Component } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { Query } from "react-apollo";
-import { gql } from "apollo-boost";
+import { Query } from 'react-apollo';
+import { gql } from 'apollo-boost';
 
 class SoloCommits extends Component {
   constructor(props) {
     super();
     this.state = {
-      results: [],
       startDate: new Date(props.startDate).toISOString(),
-      endDate: props.endDate + "T23:59:59.999Z",
+      endDate: props.endDate + 'T23:59:59.999Z',
       username: props.username,
       repository: props.repository,
-      winner: "",
+      winner: '',
       highScore: 0,
-      winnerURL: ""
+      winnerURL: ''
     };
   }
 
@@ -44,7 +43,7 @@ class SoloCommits extends Component {
     );
 
     //returns winner and high score
-    console.log("winner, should only happen once", winner, testing[winner]);
+    console.log('winner, should only happen once', winner, testing[winner]);
 
     //setting state here crashes react, you cant set the state multiple times from within the render
     // this.setState({ winner: winner });
@@ -61,7 +60,7 @@ class SoloCommits extends Component {
           {
             repository(owner: "${this.state.username}", name: "${
           this.state.repository
-        }") {
+          }") {
               defaultBranchRef {
                 target {
                   ... on Commit {
