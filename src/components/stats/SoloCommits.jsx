@@ -9,23 +9,24 @@ class SoloCommits extends Component {
     super();
     this.state = {
       startDate: new Date(props.startDate).toISOString(),
-      endDate: props.endDate + 'T23:59:59.999Z',
+      endDate: `${props.endDate}T23:59:59.999Z`,
       username: props.username,
       repository: props.repository,
       winner: '',
       highScore: 0,
-      winnerURL: ''
     };
   }
 
+  // eslint-disable-next-line class-methods-use-this
   findHigest(data) {
-    let testing = {};
+    const testing = {};
     console.log(data);
     console.log(data.repository.defaultBranchRef.target.history.nodes.length);
 
-    data.repository.defaultBranchRef.target.history.nodes.forEach(el => {
+    const formatted = data.repository.defaultBranchRef.target.history.nodes;
+
+    formatted.forEach((el) => {
       if (el.author.user != null) {
-        //if testing user does not exist create it
         if (!testing[el.author.user.login]) {
           testing[el.author.user.login] = el.additions;
         } else {
@@ -38,18 +39,18 @@ class SoloCommits extends Component {
 
       // this.setState({ winnerURL: "winner" });
     });
-    let winner = Object.keys(testing).reduce((a, b) =>
-      testing[a] > testing[b] ? a : b
-    );
+    const winner = Object.keys(testing).reduce((a, b) => (testing[a] > testing[b] ? a : b));
 
-    //returns winner and high score
+    // returns winner and high score
     console.log('winner, should only happen once', winner, testing[winner]);
 
-    //setting state here crashes react, you cant set the state multiple times from within the render
+    // setting state here crashes react, you cant set the state
+    // multiple times from within the render
     // this.setState({ winner: winner });
     // this.setState({ highScore: testing[winner] });
 
-    //i need an object here that has more that winner and commit total so i can use that to build the
+    // i need an object here that has more that winner
+    // and commit total so i can use that to build the
     // card, rather than recalling GQL like in the axios example
   }
 
@@ -58,16 +59,11 @@ class SoloCommits extends Component {
       <Query
         query={gql`
           {
-            repository(owner: "${this.state.username}", name: "${
-          this.state.repository
-          }") {
+            repository(owner: "${this.state.username}", name: "${this.state.repository}") {
               defaultBranchRef {
                 target {
                   ... on Commit {
-                    history(
-                      since: "${this.state.startDate}"
-                      until: "${this.state.endDate}"
-                    ) {
+                    history(since: "${this.state.startDate}" until: "${this.state.endDate}") {
                       nodes {
                         additions
                         author {
@@ -75,7 +71,6 @@ class SoloCommits extends Component {
                             login
                             url
                             avatarUrl
-                            
                             followers {
                               totalCount
                             }
@@ -99,13 +94,14 @@ class SoloCommits extends Component {
 
           this.findHigest(data);
 
-          if (data)
+          if (data) {
             return (
               <div>
                 <h1>{this.state.winner}</h1>
                 <h2>{this.state.highScore}</h2>
               </div>
             );
+          }
         }}
       </Query>
     );
