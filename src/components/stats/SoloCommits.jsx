@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Query } from 'react-apollo';
 import { gql } from 'apollo-boost';
+import client from '../../utils/GitHubGQL';
 
 class SoloCommits extends Component {
   constructor(props) {
@@ -15,6 +16,36 @@ class SoloCommits extends Component {
       winner: '',
       highScore: 0,
     };
+  }
+
+  componentDidMount() {
+    const { username } = this.state;
+    const { repository } = this.state;
+
+    client.query({
+      query: gql`
+      {
+        repository(owner: "${this.state.username}", name: "${this.state.repository}") {
+          defaultBranchRef {
+            target {
+              ... on Commit {
+                history(since: "${this.state.startDate}" until: "${this.state.endDate}") {
+                  nodes {
+                    additions
+                    author {
+                      user {
+                        login
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }`
+    })
+      .then(result => console.log(result));
   }
 
   // eslint-disable-next-line class-methods-use-this
