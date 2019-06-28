@@ -18,10 +18,12 @@ class SoloCommits extends Component {
   }
 
   componentDidMount() {
-    const { username } = this.state;
-    const { repository } = this.state;
-    const { startDate } = this.state;
-    const { endDate } = this.state;
+    const {
+      username,
+      repository,
+      startDate,
+      endDate,
+    } = this.state;
 
     client.query({
       query: gql`
@@ -47,11 +49,11 @@ class SoloCommits extends Component {
       }`,
     })
       .then((result) => {
-        this.findHigest(result);
+        this.findHighest(result);
       });
   }
 
-  findHigest(data) {
+  findHighest(data) {
     const testing = {};
     const formatted = data.data.repository.defaultBranchRef.target.history.nodes;
 

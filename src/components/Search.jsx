@@ -39,22 +39,27 @@ class Search extends Component {
     this.setState({ endDate: e.target.value });
   }
 
-  //need to add a default search value here if those fields are not added.
-  _selectRepo(event) {
-    if (!this.state.username || !this.state.repository) {
+  _selectRepo() {
+    const {
+      username,
+      repository,
+      startDate,
+      endDate,
+    } = this.state;
+
+    const { history } = this.props;
+
+    if (!username || !repository) {
+      // disabled submit if user or repository is empty, otherwise submits
     } else {
-      this.props.history.push(
-        `/project/${this.state.username}/${this.state.repository}/${
-        this.state.startDate
-        }/${this.state.endDate}`,
+      history.push(
+        `/project/${username}/${repository}/${startDate}/${endDate}`,
 
       );
     }
   }
 
   render() {
-    //const { validated } = this.state;
-
     return (
       <div>
         <Navigation />

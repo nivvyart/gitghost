@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { gql } from "apollo-boost";
-import { Query } from "react-apollo";
+import React, { Component } from 'react';
+import { gql } from 'apollo-boost';
+import { Query } from 'react-apollo';
 
 import {
   Chart,
@@ -8,29 +8,35 @@ import {
   ChartStack,
   ChartThemeColor,
   ChartThemeVariant,
-  ChartAxis
-} from "@patternfly/react-charts";
+  ChartAxis,
+} from '@patternfly/react-charts';
 
 class PullStats extends Component {
   constructor(props) {
     super();
     this.state = {
       startDate: new Date(props.startDate).toISOString(),
-      endDate: props.endDate + "T23:59:59.999Z",
+      endDate: `${props.endDate}T23:59:59.999Z`,
       username: props.username,
-      repository: props.repository
+      repository: props.repository,
     };
   }
+
   render() {
+    const {
+      username,
+      repository,
+      startDate,
+      endDate,
+    } = this.state;
+
     return (
       <div className="stack-chart-container">
         <p className="h5">Pull Requests Total</p>
         <Query
           query={gql`
                     {
-                        repository(owner: "${this.state.username}", name: "${
-            this.state.repository
-          }") {
+                      repository(owner: "${username}", name: "${repository}") {
                           pullRequests(last: 30) {
                             edges {
                               node {
@@ -41,11 +47,10 @@ class PullStats extends Component {
                                 createdAt
                                 additions
                                 deletions
-                              }
                             }
                           }
                         }
-
+                      }
                     }
                   `}
         >
@@ -60,16 +65,15 @@ class PullStats extends Component {
                 <ChartStack domainPadding={{ x: [10, 2] }} horizontal>
                   {data.repository.pullRequests.edges
                     .filter(
-                      ({ node }) =>
-                        node.createdAt > this.state.startDate &&
-                        node.createdAt < this.state.endDate
+                      ({ node }) => node.createdAt > startDate
+                        && node.createdAt < endDate,
                     )
                     .map(({ node }, index) => (
                       <ChartBar
                         key={index}
                         data={[
                           { x: node.author.login, y: node.additions },
-                          { x: node.author.login, y: node.deletions }
+                          { x: node.author.login, y: node.deletions },
                         ]}
                       />
                     ))}
