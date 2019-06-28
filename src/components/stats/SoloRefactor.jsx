@@ -1,85 +1,84 @@
-import React, { Component } from "react";
-import axios from "axios";
-import Github from "../../utils/GitHubAxios";
+import React, { Component } from 'react';
 
-import { Query } from "react-apollo";
-import { gql } from "apollo-boost";
+import { Query } from 'react-apollo';
+import { gql } from 'apollo-boost';
+import client from '../../utils/GitHubGQL';
 
 class SoloRefactor extends Component {
   constructor(props) {
     super();
     this.state = {
-      results: [],
       startDate: new Date(props.startDate).toISOString(),
-      endDate: props.endDate + "T23:59:59.999Z",
+      endDate: `${props.endDate}T23:59:59.999Z`,
       username: props.username,
       repository: props.repository,
-      winner: "",
-      highScore: 0
+      winner: '',
+      highScore: 0,
     };
   }
 
   componentDidMount() {
-    const username = this.state.username;
-    const repository = this.state.repository;
+    const { username } = this.state;
+    const { repository } = this.state;
+    const { startDate } = this.state;
+    const { endDate } = this.state;
 
-    const requests = [];
-
-    Github.getUserRepo(username, repository).then(result => {
-      result.data.forEach(commit => {
-        requests.push(
-          axios
-            .get(
-              `https://api.github.com/repos/${username}/${repository}/commits/${
-                commit.sha
-              }`
-            )
-            .then(result => {
-              let data;
-              if (
-                result.data.commit.author.date > this.state.startDate &&
-                result.data.commit.author.date < this.state.endDate
-              ) {
-                data = {
-                  author: result.data.author.login,
-                  deletions: result.data.stats.deletions
-                };
-                this.setState({ results: [...this.state.results, data] });
+    client.query({
+      query: gql`
+      {
+        repository(owner: "${username}", name: "${repository}") {
+          defaultBranchRef {
+            target {
+              ... on Commit {
+                history(since: "${startDate}" until: "${endDate}") {
+                  nodes {
+                    deletions
+                    author {
+                      user {
+                        login
+                      }
+                    }
+                  }
+                }
               }
-            })
-        );
+            }
+          }
+        }
+      }`,
+    })
+      .then((result) => {
+        this.findHigest(result);
       });
-      Promise.all(requests).then(() => {
-        // TODO: call findHighest
-        this.findHigest();
-      });
-    });
   }
 
-  findHigest() {
-    let testing = {};
+  findHigest(data) {
+    const testing = {};
+    const formatted = data.data.repository.defaultBranchRef.target.history.nodes;
 
-    this.state.results.forEach(el => {
-      if (!testing[el.author]) {
-        testing[el.author] = el.deletions;
-      } else {
-        testing[el.author] += el.deletions;
+    formatted.forEach((el) => {
+      if (el.author.user != null) {
+        if (!testing[el.author.user.login]) {
+          testing[el.author.user.login] = el.deletions;
+        } else {
+          testing[el.author.user.login] += el.deletions;
+        }
       }
     });
-    let winner = Object.keys(testing).reduce((a, b) =>
-      testing[a] > testing[b] ? a : b
-    );
-    this.setState({ winner: winner });
-    this.setState({ highScore: testing[winner] });
+    // eslint-disable-next-line max-len
+    const highScoreWinner = Object.keys(testing).reduce((a, b) => (testing[a] > testing[b] ? a : b));
+    this.setState({ winner: highScoreWinner });
+    this.setState({ highScore: testing[highScoreWinner] });
   }
 
   render() {
-    if (!this.state.results) return <p>loading...</p>;
+    const { winner } = this.state;
+    const { highScore } = this.state;
+
     return (
       <Query
         query={gql`
           {
-            user(login: "${this.state.winner}") {
+            user(login: "${winner}") {
               avatarUrl
               url
 
@@ -97,27 +96,30 @@ class SoloRefactor extends Component {
           if (loading) return <p>Loading...</p>;
           if (error) return <p>Error </p>;
 
-          if (data)
+          if (data) {
             return (
               <div>
                 <div className="row mt-3 border">
                   <div className="col-md-4 ">
-                    <img src={data.user.avatarUrl} alt={this.state.winner} />
+                    <img src={data.user.avatarUrl} alt={winner} />
                   </div>
                   <div className="col-md-8 card-body ">
                     <h3 className="font-weight-bold">Refactor King</h3>
-                    <a target="_blank" href={data.user.url}>
-                      <h5>{this.state.winner}</h5>
+                    <a target="_blank" rel="noopener noreferrer" href={data.user.url}>
+                      <h5>{winner}</h5>
                     </a>
                     <ul className="list-inline">
                       <li className="list-inline-item">
-                        Refactor total: {this.state.highScore}
+                        Refactor total:
+                        {highScore}
                       </li>
                       <li className="list-inline-item">
-                        Followers: {data.user.followers.totalCount}
+                        Followers:
+                        {data.user.followers.totalCount}
                       </li>
                       <li className="list-inline-item">
-                        Starred Repositories:{" "}
+                        Starred Repositories:
+                        {' '}
                         {data.user.starredRepositories.totalCount}
                       </li>
                     </ul>
@@ -125,6 +127,7 @@ class SoloRefactor extends Component {
                 </div>
               </div>
             );
+          }
         }}
       </Query>
     );
