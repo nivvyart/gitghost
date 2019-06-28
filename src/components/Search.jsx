@@ -39,15 +39,24 @@ class Search extends Component {
     this.setState({ endDate: e.target.value });
   }
 
-  //need to add a default search value here if those fields are not added.
   _selectRepo() {
-    this.props.history.push(
-      `/project/${this.state.username}/${this.state.repository}/${
-        this.state.startDate
-      }/${this.state.endDate}`
+    const {
+      username,
+      repository,
+      startDate,
+      endDate,
+    } = this.state;
 
-      //this.props.match.params.usernmae/repo
-    );
+    const { history } = this.props;
+
+    if (!username || !repository) {
+      // disabled submit if user or repository is empty, otherwise submits
+    } else {
+      history.push(
+        `/project/${username}/${repository}/${startDate}/${endDate}`,
+
+      );
+    }
   }
 
   render() {
@@ -74,6 +83,7 @@ class Search extends Component {
                 className="form-control"
                 id="inlineFormInputGroupUsername2"
                 placeholder="GitHub Username"
+                required
               />
             </div>
 
@@ -87,6 +97,7 @@ class Search extends Component {
               className="form-control mb-2 mr-sm-2"
               id="inlineFormInputName2"
               placeholder="Repository"
+              required
             />
 
             <input
@@ -106,7 +117,7 @@ class Search extends Component {
             <button
               type="submit"
               className="btn btn-primary mb-2"
-              onClick={this._selectRepo}
+              onClick={e => this._selectRepo(e)}
               onChange={this._handleRepoChange}
             >
               Goto Repo
