@@ -14,12 +14,16 @@ class Home extends React.Component {
           <div className="card text-center">
             <div className="card-body">
               <h1 className="h1">Welcome to GitGhost - Dev mode on</h1>
-              <img src={require("./image.png")} alt="" />
+              <img src={require('./image.png')} alt="" />
 
               <p className="card-text">
                 Search GitHub Users and repositories to get insite into your
                 projects!
               </p>
+
+              <a href='' className="btn btn-primary">
+                Login with Github
+              </a>
 
               <a href="#/search" className="btn btn-primary">
                 Start Ghosting!
