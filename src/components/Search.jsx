@@ -1,20 +1,20 @@
-import React, { Component } from "react";
-import moment from "moment";
+import React, { Component } from 'react';
+import moment from 'moment';
 
-import RepoList from "./stats/RepoList";
-import Navigation from "./Navigation";
+import RepoList from './stats/RepoList';
+import Navigation from './Navigation';
 
 class Search extends Component {
   constructor() {
     super();
 
     this.state = {
-      username: "",
-      repository: "",
-      startDate: moment().format("YYYY-MM-DD"),
+      username: '',
+      repository: '',
+      startDate: moment().format('YYYY-MM-DD'),
       endDate: moment()
-        .add(5, "d")
-        .format("YYYY-MM-DD")
+        .add(5, 'd')
+        .format('YYYY-MM-DD'),
     };
     this._handleUserChange = this._handleUserChange.bind(this);
     this._handleRepoChange = this._handleRepoChange.bind(this);
