@@ -1,39 +1,39 @@
-import React from "react";
-import { Bullseye } from "@patternfly/react-core";
+import React from 'react';
+import { Bullseye } from '@patternfly/react-core';
+import { useAuth0 } from '../react-auth0-wrapper';
 
-class Home extends React.Component {
-  constructor(props) {
-    super();
-    this.state = {};
-  }
+const Home = () => {
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
 
-  render() {
-    return (
-      <Bullseye>
-        <div className="padding-top">
-          <div className="card text-center">
-            <div className="card-body">
-              <h1 className="h1">Welcome to GitGhost - Dev mode on</h1>
-              <img src={require('./image.png')} alt="" />
-
-              <p className="card-text">
-                Search GitHub Users and repositories to get insite into your
-                projects!
-              </p>
-
-              <a href='' className="btn btn-primary">
-                Login with Github
-              </a>
-
-              <a href="#/search" className="btn btn-primary">
+  return (
+    <Bullseye>
+      <div className="padding-top">
+        <div className="card text-center">
+          <div className="card-body">
+            <h1 className="h1">Welcome to GitGhost - Dev mode on</h1>
+            <img src={require('./image.png')} alt="" />
+            <p className="card-text">
+              Search GitHub Users and repositories to get insite into your
+              projects!
+            </p>
+            <div>
+              {!isAuthenticated && (
+                <button className="btn btn-primary"
+                  onClick={() => loginWithRedirect({})
+                  }
+                >
+                  log in
+            </button>
+              )}
+              {isAuthenticated && <a href="#/search" className="btn btn-primary">
                 Start Ghosting!
-              </a>
+              </a>}
             </div>
           </div>
         </div>
-      </Bullseye>
-    );
-  }
-}
+      </div>
+    </Bullseye>
+  );
+};
 
 export default Home;

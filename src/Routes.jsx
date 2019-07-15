@@ -1,11 +1,15 @@
-import React, { Component } from "react";
-import Home from "./components/Home";
-import Search from "./components/Search";
-import Project from "./components/Project";
-import { ApolloProvider } from "react-apollo";
-import client from "./utils/GitHubGQL";
+import React, { Component } from 'react';
+import { ApolloProvider } from 'react-apollo';
 
-import { HashRouter as Router, Route } from "react-router-dom";
+import { HashRouter as Router, Route } from 'react-router-dom';
+
+
+import Home from './components/Home';
+import Search from './components/Search';
+import Project from './components/Project';
+import Profile from './components/Profile';
+import client from './utils/GitHubGQL';
+
 
 class Routes extends Component {
   constructor() {
@@ -23,6 +27,7 @@ class Routes extends Component {
             path="/project/:username/:repository/:startDate/:endDate"
             component={Project}
           />
+          <Route path="/profile" component={Profile} />
         </Router>
       </ApolloProvider>
     );

@@ -24,3 +24,4 @@ yarn-error.log*
 
 # Login details
 /src/utils/secrets.json
+/src/auth_config.json
